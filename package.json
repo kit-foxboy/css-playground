@@ -4,7 +4,7 @@
   "description": "Just a place to experiment with SASS/CSS",
   "main": "index.js",
   "scripts": {
-    "compile:sass": "node-sass sass/natours.scss css/natours.css -w"
+    "compile:sass": "node-sass sass/main.scss css/styles.css -w"
   },
   "repository": {
     "type": "git",
