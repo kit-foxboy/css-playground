@@ -1,14 +1,24 @@
 .header {
-    height: 95vh;
-    background-image: linear-gradient(
-        to right bottom, 
-        rgba($color-primary-light, 0.8), 
-        rgba($color-primary-dark, 0.8)), 
-        url(../img/hero.jpg);
-    background-size: cover;
-    background-position: top;
-    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-    position: relative;
+    height: 80vh;
+
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+        height: 95vh;
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+        @include respond(phone) {
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+        }
+    }
+    
+    //include mixins
+    @include to-right-bottom-gradient($color-primary-light, $color-primary-dark, "../img/hero-small.jpg");
+    
+    //handle image resolution
+    @include adjustImage(2x) {
+        @include to-right-bottom-gradient($color-primary-light, $color-primary-dark, "../img/hero.jpg");
+    }
 
     &__logo-box {
         position: absolute;
@@ -38,17 +48,9 @@
 
     &--main {
         display: block;
-        font-size: 6rem;
-        font-weight: 400;
-        letter-spacing: 3.5rem;
-        animation: moveInLeft 1s ease-out;
     }
     
     &--sub {
         display: block;
-        font-size: 2rem;
-        font-weight: 700;
-        letter-spacing: 1.75rem;
-        animation: moveInRight 1s ease-out;
     }
 }
