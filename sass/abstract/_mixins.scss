@@ -1,0 +1,69 @@
+//STYLING
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin to-right-bottom-gradient($color-1, $color-2, $image-url) {
+    background-image: linear-gradient(
+        to right bottom, 
+        rgba($color-1, 0.8), 
+        rgba($color-2, 0.8)), 
+        url($image-url);
+    background-size: cover;
+    background-position: top;
+    position: relative;
+}
+
+@mixin text-gradient($color-1, $color-2) {
+    display: inline-block;
+    background-image: linear-gradient(to right, $color-1, $color-2);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    color: transparent;
+    transition-property: all .2s;
+}
+
+//POSITIONING
+@mixin absoluteCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@mixin fixedCenter {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+//MEDIA QUERY DEFINITIONS
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone {
+        @media only screen and ( max-width: 37.5em) { @content; } //600px
+    }
+    @if $breakpoint == tab-port {
+        @media only screen and ( max-width: 56.25em) { @content; } //900px
+    }
+    @if $breakpoint == tab-land {
+        @media only screen and ( max-width: 75em) { @content; } //1200px
+    }
+    @if $breakpoint == big-desktop {
+        @media only screen and ( min-width: 112.5em) { @content; } //1800px+
+    }
+}
+
+@mixin adjustImage($resolution) {
+    @if $resolution == 2x {
+        @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+                only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+                only screen and (min-width: 125em) { @content; }
+    }
+}
